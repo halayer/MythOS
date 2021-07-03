@@ -1,0 +1,9 @@
+#romimage:    file=BIOS-bochs-latest, address=0xF0000
+#vgaromimage: file=VGABIOS-lgpl-latest
+
+floppya: 1_44=mythos.img, status=inserted
+boot: floppy
+
+log:    logfile.log
+error:  action=report
+info:   action=report

@@ -1,0 +1,5 @@
+- Stack dump implementieren
+
+
+Controller Failure (ret AH = 20h) wird stets durch eine nonexistente Sektornummer
+ausgelöst, also Sektor > 18

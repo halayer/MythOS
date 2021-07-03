@@ -1,0 +1,49 @@
+#!/bin/bash
+
+fasm boot/MBR_stg1.asm boot/MBR_stg1.bin
+fasm boot/MBR_stg2.asm boot/MBR_stg2.bin
+
+cd src/kernel
+make
+cd ../..
+
+cd src/HAL
+./build
+cd ../..
+
+#CC=gcc
+#LD=ld
+#CFLAGS="-m32 -Wall -fno-stack-protector -ffreestanding -nostdinc -c -Iinclude"
+#LDFLAGS="-melf_i386 -Ttext=0x10000"
+
+#$CC $CFLAGS src/kernel/kernel.c -o kernel.o
+#$CC $CFLAGS src/kernel/kcvideo.c -o kcvideo.o
+#$CC $CFLAGS src/kernel/kccursor.c -o kccursor.o
+#$CC $CFLAGS src/HAL/ports.c -o ports.o
+#$LD $LDFLAGS kernel.o kcvideo.o kccursor.o ports.o -o content/kernel.elf
+#rm kernel.o kcvideo.o kccursor.o ports.o
+
+dd if=/dev/zero of=mythos.img bs=512 count=256 # Create the IMG file
+
+# Setup IMG file with our own bootloader
+sudo losetup /dev/loop0 mythos.img
+sudo cp boot/MBR_stg1.bin /dev/loop0 # Overwrite the bootloader with our own
+sudo losetup -d /dev/loop0
+
+sfdisk mythos.img < mythos.img.layout # Create partition table
+
+# Create a FAT12 partition
+sudo losetup /dev/loop1 mythos.img -o 16384
+sudo mkdosfs /dev/loop1                     # Format to FAT
+
+# Mount the FAT12 file system, and copy necessary files to it
+sudo mount /dev/loop1 /mnt
+sudo cp content/* /mnt
+sudo umount /mnt
+
+sudo losetup -d /dev/loop1
+
+# Setup the partition with our own bootloader
+sudo losetup /dev/loop2 mythos.img -o 16446
+sudo cp boot/MBR_stg2.bin /dev/loop2	# Overwrite the bootloader of the partition with our own
+sudo losetup -d /dev/loop2

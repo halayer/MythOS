@@ -1,0 +1,6 @@
+label: dos
+label-id: 0x8e648a50
+device: cos.img
+unit: sectors
+
+os.img1 : start=32, size=64, type=1, bootable
