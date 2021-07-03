@@ -6,7 +6,7 @@
 ; in one procedure: A20_enable
 
 A20_enable:
-    ; Algorithmus:
+    ; Vorgehensweise:
     ; |- Mithilfe von INT 15h AX=2041h A20 aktivieren
     ; |  +- Befehl unterstützt? Wenn nicht, fortfahren
     ; |- A20-Unterstützung abfragen:
