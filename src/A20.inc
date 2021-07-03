@@ -8,7 +8,7 @@
 A20_enable:
     ; Algorithmus:
     ; |- Mithilfe von INT 15h AX=2041h A20 aktivieren
-    ; |  +- Befehl unterstützt? Wenn nicht fortfahren, ansons
+    ; |  +- Befehl unterstützt? Wenn nicht, fortfahren
     ; |- A20-Unterstützung abfragen:
     ; |  |- Keyboard controller unterstützt A20? --> .keybd
     ; |  +- Port 0x92 unterstützt A20? --> .port
