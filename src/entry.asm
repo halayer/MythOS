@@ -3,7 +3,7 @@
 ; ===============
 ;
 ; This assembly program always gets loaded by the stage 2 bootloader.
-; It looks up where the kernel is in "oskernel.cfg", loads it, and does
+; It looks up where the kernel is in "kernel.cfg", loads it, and does
 ; a far jump into protected mode into the kernel.
 
 
