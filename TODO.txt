@@ -1,5 +1,11 @@
-- Stack dump implementieren
+- auf anderes Dateisystem (FAT32?) umstellen!
+- HAL-Interrupt-Wrapper (Kontext zur Routine weitergeben)
+- Stack dump (src/x86_64/bugcheck)
+- mythos-konsole.adb: x86 string optimization
+- APIC (Multicore)
+- UEFI Ada binding: Convention => Stdcall
 
+- UEFI Treiber reverse engineeren (GOP calls mit qemu + gdb)
 
-Controller Failure (ret AH = 20h) wird stets durch eine nonexistente Sektornummer
-ausgelöst, also Sektor > 18
+Controller Failure (ret AH = 20h) is always raised by a non-existent
+sector number (sector > 18)
